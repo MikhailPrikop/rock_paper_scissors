@@ -1,0 +1,6 @@
+# Default ignored files
+.idea/
+__pycache__/
+/config.ini
+/history_games.json
+/pyvenv.cfg

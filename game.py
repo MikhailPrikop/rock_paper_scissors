@@ -52,16 +52,24 @@ class ScoreBoard:
 
 
 
-
+#директория файла
+path = os.path.dirname(__file__)
 
 # чтение файла конфигурации,
-
+path_ini = path + '\\config.ini'
 config = configparser.ConfigParser()
-config.read('config.ini')
-language  = config.get('LANGUAGE', 'default_language')
+if os.path.isfile(path_ini) == True:
+    config.read(path_ini)
+    language  = config.get('LANGUAGE', 'default_language')
+else:
+    config.add_section('LANGUAGE')
+    config.set('LANGUAGE', 'default_language', 'EN')
+    with open(path_ini, 'w') as configfile:
+        config.write(configfile)
+        language = 'EN'
+
 
 # чтение файла истории игр
-path = os.path.dirname(__file__)
 path = path + '\\history_games.json'
 if os.path.isfile(path) == True:
     with open(path, 'r') as file:
